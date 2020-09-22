@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Covid-19 Tracker</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" media="all"
+	href="../../css/gtvg.css" th:href="@{/css/gtvg.css}" />
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+	crossorigin="anonymous">
+</head>
+
+<body>
+
+	<div class="jumbotron">
+		<!-- <h1 class="display-4">Covid Cases in all Countries</h1> -->
+		<p class="lead">
+			Total cases reported as per <span id="datetime"></span>
+		</p>
+		<h1 class="display-1" th:text="${totalReportedCases}"></h1>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<p class="lead">increase in number of cases since last update :</p>
+		<h1 class="display-3" th:text="${differenceInCases}"></h1>
+	</div>
+
+	<div class="container">
+
+		<table class="table table-light">
+			<thead class="thead-dark">
+				<tr>
+					<th scope="col">Country</th>
+					<th scope="col">State</th>
+					<th scope="col">Total Cases</th>
+					<th scope="col">Increase</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="locationStat : ${locationStats}">
+					<td th:text="${locationStat.country}"></td>
+					<td th:text="${locationStat.state}"></td>
+					<td th:text="${locationStat.latestTotalCases}"></td>
+					<td th:text="${locationStat.differenceFromPreviousDay}"></td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+
+</body>
+<script type="text/javascript">
+	var dt = new Date();
+	document.getElementById("datetime").innerHTML = dt.toLocaleString();
+</script>
+</html>
